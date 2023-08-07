@@ -1,0 +1,21 @@
+{
+  "name": "vhp-japi",
+  "version": "1.0.0",
+  "description": "VHP Jonas API server",
+  "main": "server.js",
+  "scripts": {
+    "dev":"nodemon server.js",
+    "server":"node server.js",
+    "store": "node server.js"
+  },
+  "author": "cmv",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "child-process": "^1.0.2",
+    "easy-soap-request": "^4.7.0",
+    "xml2js": "^0.4.23"
+  }
+}
