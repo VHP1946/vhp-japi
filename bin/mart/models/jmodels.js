@@ -1,0 +1,14 @@
+module.exports={
+    maps:{
+        WO_Headers_tbl:require('./maps/WO_Headers_tbl.json'),
+        WO_SC_ServiceContractMaster_tbl:require('./maps/WO_SC_ServiceContractMaster_tbl.json'),
+        AR_CustomerServiceItems_tbl:require('./maps/AR_CustomerServiceItems_tbl.json')
+    },
+    schemes:{
+        ...require('./schemes/genericModels.js'),
+        ...require('./schemes/serviceModels.js'),
+        ...require('./schemes/jobModels.js'),
+        ...require('./schemes/customerModels.js'),
+        ...require('./schemes/reportingModels.js')
+    }
+}

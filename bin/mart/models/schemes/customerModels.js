@@ -1,0 +1,23 @@
+module.exports={
+    customermaster:{
+        jpack:(data)=>{
+            return{
+                Option:'download',
+                Template:this.customermaster.map,
+                WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
+            }
+        },
+        map:'AR_CustomerMaster_tb'
+    },
+    custserviceitems:{
+        jpack:(data)=>{
+            return{
+                Option:'download',
+                Template:this.custserviceitems.map,
+                WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
+            }
+        },
+        map:'AR_CustomerServiceItems_tbl'
+    }
+
+}

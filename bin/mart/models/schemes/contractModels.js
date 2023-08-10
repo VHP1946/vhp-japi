@@ -1,0 +1,12 @@
+module.exports={
+    contracttable:{
+        jpack:(data)=>{
+            return{
+                Option:'download',
+                Template:this.contracttable.map,
+                WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
+            }
+        },
+        map:'WO_SC_ServiceContractMaster_tbl'
+    }
+}

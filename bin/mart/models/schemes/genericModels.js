@@ -1,0 +1,23 @@
+module.exports={
+    custom:{
+        jpack:(data)=>{
+            return{
+                WebMethod:'GJZJ82J',
+                Option:data.option||'template',
+                Template:data.template||'',
+                SELECT:data.select||[],
+                WHERE:data.where||[]
+            }
+        },
+        map:null
+    },
+    test:{
+        jpack:(data)=>{
+            return{
+                WebMethod:'GJZJ82J',
+                Option:'template',
+                Template:'WO_Headers_tbl'
+            }
+        }
+    }
+}

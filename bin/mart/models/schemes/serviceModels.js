@@ -1,0 +1,85 @@
+
+const WOtable = 'WO_Headers_tbl';
+const SELECTwo=[
+    'WorkOrderNumber',
+    'CustomerCode',
+    'InvoiceNumber',
+    'DateCompleted',
+    'CostItem',
+    'SalesCategoryCode',
+    'ReferenceNumber',
+    'TechnicianID',
+    'TakenBy'
+]
+
+module.exports={
+    womaster:{
+        jpack:(data)=>{
+            return{
+                Template:this.womaster.map,
+                SELECT:SELECTwo,
+                WHERE:data.where||[]
+            }
+        },
+        map:WOtable
+    },
+    wobynumber:{
+        jpack:function(data){
+            return{
+                Template:this.map,
+                SELECT:SELECTwo,
+                WHERE:[{OP:'=',WorkOrderNumber:data.wonum||''}]
+            }
+        },
+        map:WOtable
+    },
+    wobydate:{
+        jpack:(data)=>{
+            return{
+                Template:this.wobydate.map,
+                SELECT:SELECTwo,
+                WHERE:[{OP:"BETWEEN",DateCompleted:data.range||[Date.now,Date.now]}]
+            }
+        },
+        map:WOtable
+    },
+    wohistory:{
+        jpack:(data)=>{
+            return{
+                Template:this.wohistory.map
+            }
+        },
+        map:'WO_WorkOrderHistory_tbl'
+    },
+    woeom:{
+      jpack:(data)=>{
+        return{
+          WebMethod:'GJZJ82J',
+          Option:'download',
+          CompanyCode:'01',
+          Template: 'WO_DetailHistory_tbl'
+        }
+      }
+    },
+    woinvoicing:{
+      jpack:(data)=>{
+        return{
+          WebMethod:'GJZJ82J',
+          Option:'download',
+          CompanyCode:'01',
+          Template:'WO_InvoiceBillingRecap_tbl'
+        }
+      }
+    },
+    flatratebook:{
+        jpack:(data)=>{
+            return{
+                WebMethod:'GJZJ82J',
+                Option:'download',
+                CompanyCode:'01',
+                Template:'WO_FlatRateBookPricing_tbl',
+                WHERE:[{OP:'=',FlatRateBookCode:data.bookcode||''}]
+            }
+        }
+    }
+}

@@ -6,15 +6,13 @@ let pack = {
         request:'JMART'
     },
     pack:{
-        table:'custom',
-        WebMethod:'GJZJ82J',
-        Option:'download',
-        CompanyCode:'01',
-        Template:'WO_Headers_tbl',
-        SELECT:['WorkOrderNumber','CustomerCode','InvoiceNumber','DateCompleted','CostItem','SalesCategoryCode','ReferenceNumber','TechnicianID','TakenBy'],
-        WHERE:[{OP:"BETWEEN",DateCompleted:['2022-09-01','2022-09-01']}]
+        table:'wobynumber',
+        wonum:'00036265',
+        option:'download'
+
     }
 }
+
 
 let request = new JMart(pack);
 

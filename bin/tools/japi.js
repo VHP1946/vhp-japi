@@ -5,7 +5,6 @@
 */
 const soapreq = require('easy-soap-request');
 var parsexml = require('xml2js').parseString;
-var j2vconvert = require('./maps/jonas-table-headers.json');
 
 const url = 'https://websvcazure.jonasportal.com/jonasAPI/japi.asmx';
 
