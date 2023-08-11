@@ -10,18 +10,20 @@ let core = new Core({
 let pack = {
     access:{
         coid:'01',
-        request:'JMART'
+        request:'JCALL'
     },
     pack:{
-        table:'test'
+        table:'jticket',
+        wonum:'00036435'
     }
 }
 
 core.SENDrequest({
     pack:{
-        table:'test'
+        table:'jticket',
+        wonum:'00036435'
     },
-    request:'JMART'
+    request:'JCALL'
 }).then(answr=>{console.log(answr);})
 
 

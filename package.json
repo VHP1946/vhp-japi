@@ -8,7 +8,8 @@
     "server": "node server.js",
 
     "test": "node test.js",
-    "test-jmart":"node testing/jmart-test.js"
+    "test-jmart":"node testing/jmart-test.js",
+    "test-jcalls":"node testing/jcalls-test.js"
   },
   "author": "cmv",
   "license": "ISC",

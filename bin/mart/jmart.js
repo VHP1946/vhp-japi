@@ -3,7 +3,13 @@ var VHPjapi = require('../tools/japi.js');
 const jmodels = require('./models/jmodels.js');
 
 
-/**
+/**Class to help request JONAS table
+ * 
+ * It can be used in 2 different ways:
+ * 
+ * 1) for one call - 
+ * 2) for more than one call - In this case you do not have to
+ * send it a pack, and you 
  * 
  */
 module.exports=class JMart extends VHPjapi{
@@ -15,7 +21,7 @@ module.exports=class JMart extends VHPjapi{
      * } pack 
      * @returns 
      */
-    constructor(pack){
+    constructor({pack=null,keepalive=false}){
         super();
         this.respack = {
             msg:'table not found',
@@ -24,17 +30,12 @@ module.exports=class JMart extends VHPjapi{
         }
         this.schemes = jmodels.schemes;
         this.maps = jmodels.maps;
-
-        this.reqpack = this.PREPpack(pack);
-        //try{
-        //   this.reqpack.fail;
-        //    console.log('Failed');
-        //    return {...this.reqpack};
-        //}
-        //catch{
-            //this.map = j2vtables[this.reqpack];
+        console.log(pack);
+        if(!keepalive){
+            this.reqpack = this.PREPpack(pack);
+            //check for good pack?
             return this.RequestTable(this.reqpack,true)
-        //}
+        }
     }
 
     /**Takes in a table name and returns a request
@@ -81,7 +82,7 @@ module.exports=class JMart extends VHPjapi{
             if(map[m]!=''&&table[x][m]){nobj[map[m]]=table[x][m]}
           }
           nlist.push(nobj);
-          console.log('adding ',nlist);
+          //console.log('adding ',nlist);
         }return nlist;
       }return table
     }
@@ -129,6 +130,7 @@ module.exports=class JMart extends VHPjapi{
         return new Promise((resolve,reject)=>{
           //console.log('Params >',params);
           if(params.success){
+
             params.PageNum=pagecount++; //request the next page
             this.SendRequest(params).then(response=>{
               //console.log('Response ',response)
@@ -155,4 +157,12 @@ module.exports=class JMart extends VHPjapi{
         });
     }
 
+    Request=(table,coid,pack)=>{
+        console.log(this.GETtablepack(table,coid,pack))
+        return this.RequestTable({
+            success:true,
+            msg:'Requesting',
+            ask:this.GETtablepack(table,coid,pack)
+        },true)
+    }
 }

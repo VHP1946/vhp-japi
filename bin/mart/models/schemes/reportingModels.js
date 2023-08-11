@@ -10,7 +10,7 @@ module.exports={
             }
             return{
                 Option:'download',
-                Template:this.wod.map,
+                Template:'WO_WODDescription_tbl',
                 SELECT:[
                     'Amount',
                     'AuditNumber',
@@ -40,7 +40,7 @@ module.exports={
         jpack:(data)=>{
             return{
                 Option:'download',
-                Template: this.woeom.map
+                Template: 'WO_DetailHistory_tbl'
             }
         },
         map:'WO_DetailHistory_tbl'

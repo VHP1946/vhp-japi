@@ -1,16 +1,6 @@
 
 const WOtable = 'WO_Headers_tbl';
-const SELECTwo=[
-    'WorkOrderNumber',
-    'CustomerCode',
-    'InvoiceNumber',
-    'DateCompleted',
-    'CostItem',
-    'SalesCategoryCode',
-    'ReferenceNumber',
-    'TechnicianID',
-    'TakenBy'
-]
+const SELECTwo=[]
 
 module.exports={
     womaster:{

@@ -3,18 +3,17 @@ const JMart = require('../bin/mart/jmart.js');
 let pack = {
     access:{
         coid:'01',
-        request:'JMART'
+        request:'JCALL'
     },
     pack:{
-        table:'wobynumber',
-        wonum:'00036265',
-        option:'download'
+        table:'jticket',
+        wonum:'00036435'
 
     }
 }
 
 
-let request = new JMart(pack);
+let request = new JMart({pack:pack});
 
 console.log(request);
 request.then(a=>console.log(a))

@@ -3,7 +3,7 @@ module.exports={
         jpack:(data)=>{
             return{
                 Option:'download',
-                Template:this.contracttable.map,
+                Template:'WO_SC_ServiceContractMaster_tbl',
                 WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
             }
         },

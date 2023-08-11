@@ -3,7 +3,7 @@ module.exports={
         jpack:(data)=>{
             return{
                 Option:'download',
-                Template:this.customermaster.map,
+                Template:'AR_CustomerMaster_tb',
                 WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
             }
         },
@@ -13,7 +13,7 @@ module.exports={
         jpack:(data)=>{
             return{
                 Option:'download',
-                Template:this.custserviceitems.map,
+                Template:'AR_CustomerServiceItems_tbl',
                 WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
             }
         },
