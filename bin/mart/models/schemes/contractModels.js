@@ -1,12 +1,33 @@
-module.exports={
-    contracttable:{
+/*Not Ready
+    SCbyExpire:{
         jpack:(data)=>{
             return{
-                Option:'download',
                 Template:'WO_SC_ServiceContractMaster_tbl',
                 WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
             }
         },
         map:'WO_SC_ServiceContractMaster_tbl'
     }
+*/
+    
+module.exports={
+    SCmaster:{
+        jpack:(data)=>{
+            return{
+                Template:'WO_SC_ServiceContractMaster_tbl',
+                SELECT:data.select||[],
+                WHERE:data.where||[]
+            }
+        },
+        map:'WO_SC_ServiceContractMaster_tbl'
+    },
+    SCbyCustomer:{
+        jpack:(data)=>{
+            return{
+                Template:'WO_SC_ServiceContractMaster_tbl',
+                WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
+            }
+        },
+        map:'WO_SC_ServiceContractMaster_tbl'
+    },
 }

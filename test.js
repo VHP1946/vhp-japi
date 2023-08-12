@@ -3,27 +3,26 @@ const {Core}=require('vhp-api');
 
 let core = new Core({
     auth:{user:'VOGCH',pswrd:'vogel123'},
-    host:'http://localhost:8080/',
+    sync:false,
+    host:'http://172.27.32.1:8080/',//'http://localhost:8080/',
     client:true,
     dev:{comments:true,https:false}
 });
 let pack = {
     access:{
         coid:'01',
-        request:'JCALL'
+        request:'JMART'
     },
     pack:{
-        table:'jticket',
-        wonum:'00036435'
+        table:'wobynumber',
+        option:'download',
+        wonum:'00036465' //issue -> 36435
     }
 }
 
 core.SENDrequest({
-    pack:{
-        table:'jticket',
-        wonum:'00036435'
-    },
-    request:'JCALL'
+    pack:pack.pack,
+    request:'JMART'
 }).then(answr=>{console.log(answr);})
 
 

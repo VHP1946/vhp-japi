@@ -2,8 +2,18 @@ module.exports={
     customermaster:{
         jpack:(data)=>{
             return{
-                Option:'download',
                 Template:'AR_CustomerMaster_tb',
+                SELECT:data.select||[],
+                WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
+            }
+        },
+        map:'AR_CustomerMaster_tb'
+    },
+    customerbycode:{
+        jpack:(data)=>{
+            return{
+                Template:'AR_CustomerMaster_tb',
+                SELECT:data.select||[],
                 WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
             }
         },

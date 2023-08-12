@@ -6,6 +6,13 @@ const PORT = process.env.PORT || 8080//4050; //port for local host
 
 var server = http.createServer();
 
+server.on('request',(req,res)=>{//handle headers =>
+  if(req.rawHeaders['Sec-Fetch-Site']!='same-origin'){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST');
+    res.setHeader('Access-Control-Max-Age', 2592000); // 30 days
+  }
+});
 server.on('request',(req,res)=>{
     //console.log('Request from mart');
     let data = '';

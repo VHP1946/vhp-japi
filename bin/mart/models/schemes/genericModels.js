@@ -10,14 +10,5 @@ module.exports={
             }
         },
         map:null
-    },
-    test:{
-        jpack:(data)=>{
-            return{
-                WebMethod:'GJZJ82J',
-                Option:'template',
-                Template:'WO_Headers_tbl'
-            }
-        }
     }
 }

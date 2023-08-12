@@ -15,7 +15,6 @@ module.exports = ROUTEjapi=(ask={})=>{
     return new Promise((resolve,reject)=>{
         let {access,pack}=ask;
         let waiter = null;
-        console.log(ask, "PACK")
         switch(access.request.toUpperCase()){
             //case 'UPDATEFBOOK':{
             //  console.log("UPDATE F BOOK", pack)
@@ -34,7 +33,6 @@ module.exports = ROUTEjapi=(ask={})=>{
                 break;
             }
         }
-        console.log('Waiter',waiter);
         if(waiter){
             waiter.then(
             answr=>{return resolve(answr);}

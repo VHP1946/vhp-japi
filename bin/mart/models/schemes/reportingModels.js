@@ -1,5 +1,5 @@
-module.exports={
-    
+/*Not Ready
+   
     wod:{ //use for tech report // pay attention to sorting dates
         jpack:(data)=>{
             let where=[];
@@ -9,7 +9,6 @@ module.exports={
                 if(params.fromdate!=undefined&&params.todate!=undefined){where.push({OP:'BETWEEN',PostingDate:[params.fromdate,params.todate]})}
             }
             return{
-                Option:'download',
                 Template:'WO_WODDescription_tbl',
                 SELECT:[
                     'Amount',
@@ -39,10 +38,14 @@ module.exports={
     woeom:{
         jpack:(data)=>{
             return{
-                Option:'download',
                 Template: 'WO_DetailHistory_tbl'
             }
         },
         map:'WO_DetailHistory_tbl'
-    },
+    }
+*/
+
+
+module.exports={
 }
+ 
