@@ -2,7 +2,7 @@
 const http = require('http');
 const RouteJAPI = require('./bin/router.js');
 
-const PORT = process.env.PORT || 8080//4050; //port for local host
+const PORT = process.env.PORT || 7050//4050; //port for local host
 
 var server = http.createServer();
 

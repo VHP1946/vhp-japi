@@ -4,10 +4,11 @@ const {Core}=require('vhp-api');
 let core = new Core({
     auth:{user:'VOGCH',pswrd:'vogel123'},
     sync:false,
-    host:'http://172.27.32.1:8080/',//'http://localhost:8080/',
+    host:'http://172.27.32.1:8080/',//'http://localhost:8080/',//
     client:true,
     dev:{comments:true,https:false}
 });
+core.connected=true;
 let pack = {
     access:{
         coid:'01',
@@ -20,6 +21,7 @@ let pack = {
     }
 }
 
+console.log('about')
 core.SENDrequest({
     pack:pack.pack,
     request:'JMART'

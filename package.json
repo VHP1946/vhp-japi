@@ -7,7 +7,7 @@
     "dev": "nodemon server.js",
     "server": "node server.js",
 
-    "test": "node test.js",
+    "test": "node testing/test.js",
     "test-jmart":"node testing/jmart-test.js",
     "test-jcalls":"node testing/jcalls-test.js"
   },
