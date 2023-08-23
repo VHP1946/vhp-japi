@@ -78,10 +78,13 @@ module.exports=class JMart extends VHPjapi{
         let nlist=[]
         for(let x=0;x<table.length;x++){
           let nobj = {};
-          for(let m in map){
-            if(map[m]!=''&&table[x][m]){nobj[map[m]]=table[x][m]}
+          if(table[x]){
+            for(let m in map){
+              try{if(map[m]!=''&&table[x][m]){nobj[map[m]]=table[x][m]}}
+              catch{}
+            }
+            nlist.push(nobj);
           }
-          nlist.push(nobj);
           //console.log('adding ',nlist);
         }return nlist;
       }return table
@@ -133,8 +136,9 @@ module.exports=class JMart extends VHPjapi{
 
             params.PageNum=pagecount++; //request the next page
             this.SendRequest(params).then(response=>{
-              //console.log('Response ',response)
+              console.log('Response ',response)
                 let jpak={
+                    success:params.success,
                     ...response
                 }
                 if(jpak.isValid){

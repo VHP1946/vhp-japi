@@ -12,7 +12,6 @@ module.exports={
     sibycustcode:{
         jpack:(data)=>{
             return{
-                Option:'download',
                 Template:'AR_CustomerServiceItems_tbl',
                 WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
             }

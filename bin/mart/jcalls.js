@@ -30,7 +30,8 @@ module.exports={
         });
     },
     calls:{
-	    ...require('./calls/ticketing.js')
+	    ...require('./calls/ticketing.js'),
+        ...require('./calls/service-items.js')
     }
 
 }
