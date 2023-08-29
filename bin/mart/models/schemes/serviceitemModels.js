@@ -13,7 +13,7 @@ module.exports={
         jpack:(data)=>{
             return{
                 Template:'AR_CustomerServiceItems_tbl',
-                WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
+                WHERE:[{OP:'IN',CustomerCode:data.custcode||[]}]
             }
         },
         map:'AR_CustomerServiceItems_tbl'

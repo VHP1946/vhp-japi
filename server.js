@@ -22,7 +22,7 @@ server.on('request',(req,res)=>{
       console.log('JAPI Request',data);
       RouteJAPI(data).then(
         answr=>{
-          console.log('DONE',answr);
+          //console.log('DONE',answr);
           res.write(JSON.stringify(answr));//may not want to do this, return only result of request and strip rest of pack
           res.end();
         }

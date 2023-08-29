@@ -26,12 +26,12 @@
     "ApplyTax1":"",
     "ApplyTax2":"",
 
-    "LocationLine1":"",
-    "LocationLine2":"",
-    "LocationLine3":"",
-    "PhoneNumber1":"",
-    "PhoneNumber2":"",
-    "WorkOrderCategory":"",
+    "LocationLine1":"street",
+    "LocationLine2":"unit",
+    "LocationLine3":"city",
+    "PhoneNumber1":"phone1",
+    "PhoneNumber2":"phone2",
+    "WorkOrderCategory":"wocat",
     "PurchaseOrderNumber":"",
     "AnnualContractValue":"",
 

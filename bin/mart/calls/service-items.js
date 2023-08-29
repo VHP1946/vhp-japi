@@ -1,51 +1,35 @@
 
-var GETserviceitems=(custcode,table='custserviceitems')=>{
-    return new Promise((res,rej)=>{
-        let opts = {
-            table:table,
-            custcode:custcode
-        };
-        let sitems=[];
-        SENDrequestapi(opts,'jmart').then(
-          result=>{
-            if(result.body.success){
-              for(let i=0;i<result.body.table.length;i++){
-                  sitems.push(aserviceitem(result.body.table[i])); //aserviceitems()
-              }
-              let opts2 = {
-                  table:'test',
-                  option:'download',
-                  template:'AR_ServiceItemCustomInfo_tbl',
-                  where:[{OP:'=',CustomerCode:custcode}]
-              };
-              SENDrequestapi(opts2,'jmart').then(
-                answr=>{
-                  if(answr.body.success){
-                    for(let x=0,l=answr.body.table.length;x<l;x++){
-                      for(let y=0,ll=sitems.length;y<ll;y++){
-                        if(sitems[y].id===answr.body.table[x].LineNumber){
-                          switch(answr.body.table[x].FieldNumber){
-                            case "01":{sitems[y].filt1=answr.body.table[x].Information || '';}
-                            case "02":{sitems[y].filt1q=answr.body.table[x].Information || '';}
-                            case "03":{sitems[y].filt2=answr.body.table[x].Information || '';}
-                            case "04":{sitems[y].filt2q=answr.body.table[x].Information || '';}
-                            case "05":{sitems[y].beltsize=answr.body.table[x].Information || '';}
-                            case "06":{sitems[y].controls=answr.body.table[x].Information || '';}
-                            case "07":{sitems[y].refri=answr.body.table[x].Information || '';}
-                            case "08":{sitems[y].elec=answr.body.table[x].Information || '';}
-                          }
-                        }
-                      }
-                    }
-                  }
-                  return res(sitems);
-                }
-              );
-            }else{return res(sitems);}
-          }
-        );
-    })
-  }
+let aserviceitem = (si)=>{
+    if(!si || si==undefined){
+        si = {};
+    }
+    return {
+        custcode:si.custcode || '',
+        id: si.id || '',
+        tagid: si.tagid || '',
+        type: si.type || '',
+        status: si.status || '',
+        area: si.area || '',
+        location: si.location || '',
+        descr: si.descr || '',
+        manf: si.manf || '',
+        model: si.model || '',
+        serial: si.serial || '',
+        insdate: si.insdate || '',
+        manfdate:si.manfdate||'',
+        warr1: si.warr1 || '',
+        warr2: si.warr2 || '',
+        warr3: si.warr3 || '',
+        filt1:  si.filt1 || '',
+        filt1q: si.filt1q || '',
+        filt2: si.filt2 || '',
+        filt2q: si.filt2q || '',
+        beltsize: si.beltsize || '',
+        controls: si.controls || '',
+        refri: si.refri || '',
+        elec: si.elec || '',
+    }
+}
 
 module.exports={
     serviceitem:({custcode=null},jmart)=>{
@@ -56,37 +40,45 @@ module.exports={
                     custcode:custcode,
                     option:'download'
                 }).then(siresp=>{
-                    if(siresp.isValid&&siresp.result.length){
+                    console.log('Service Response >',siresp);
+                    if(siresp.isValid&& siresp.result && siresp.result.length){
                         for(let i=0;i<siresp.result.length;i++){
                             sitems.push(aserviceitem(siresp.result[i])); //aserviceitems()
                         }
                         jmart.Request('custom','01',{
                             option:'download',
                             template:'AR_ServiceItemCustomInfo_tbl',
-                            where:[{OP:'=',CustomerCode:custcode}]
+                            select:[
+
+                            ],
+                            where:[
+                                {OP:'IN',CustomerCode:custcode}
+                            ]
                         }).then(siinfo=>{
                             if(siinfo.isValid){
                                 for(let x=0,l=siinfo.result.length;x<l;x++){
                                     for(let y=0,ll=sitems.length;y<ll;y++){
-                                        if(sitems[y].id===siinfo.result[x].LineNumber){
-                                            switch(siinfo.result[x].FieldNumber){
-                                                case "01":{sitems[y].filt1=siinfo.result[x].Information || '';}
-                                                case "02":{sitems[y].filt1q=siinfo.result[x].Information || '';}
-                                                case "03":{sitems[y].filt2=siinfo.result[x].Information || '';}
-                                                case "04":{sitems[y].filt2q=siinfo.result[x].Information || '';}
-                                                case "05":{sitems[y].beltsize=siinfo.result[x].Information || '';}
-                                                case "06":{sitems[y].controls=siinfo.result[x].Information || '';}
-                                                case "07":{sitems[y].refri=siinfo.result[x].Information || '';}
-                                                case "08":{sitems[y].elec=siinfo.result[x].Information || '';}
+                                        try{
+                                            if(sitems[y].custcode === siinfo.result[x].CustomerCode && sitems[y].id===siinfo.result[x].LineNumber){
+                                                switch(siinfo.result[x].FieldNumber){
+                                                    case "01":{sitems[y].filt1=siinfo.result[x].Information || '';}
+                                                    case "02":{sitems[y].filt1q=siinfo.result[x].Information || '';break;}
+                                                    case "03":{sitems[y].filt2=siinfo.result[x].Information || '';break;}
+                                                    case "04":{sitems[y].filt2q=siinfo.result[x].Information || '';break;}
+                                                    case "05":{sitems[y].beltsize=siinfo.result[x].Information || '';break;}
+                                                    case "06":{sitems[y].controls=siinfo.result[x].Information || '';break;}
+                                                    case "07":{sitems[y].refri=siinfo.result[x].Information || '';break;}
+                                                    case "08":{sitems[y].elec=siinfo.result[x].Information || '';break;}
+                                                }
                                             }
-                                        }
+                                        }catch{console.log('bad linnumber',siinfo.result[x])}
                                     }
                                 } 
                             }
                             return resolve({
                                 success:true,
                                 msg:'Service Items',
-                                results:sitems
+                                result:sitems
                             })
                         })
                     }else{

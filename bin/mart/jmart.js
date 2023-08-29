@@ -30,7 +30,7 @@ module.exports=class JMart extends VHPjapi{
         }
         this.schemes = jmodels.schemes;
         this.maps = jmodels.maps;
-        console.log(pack);
+        //console.log(pack);
         if(!keepalive){
             this.reqpack = this.PREPpack(pack);
             //check for good pack?
@@ -74,7 +74,7 @@ module.exports=class JMart extends VHPjapi{
 
     MAPtable=(table,map)=>{
       if(map){
-        console.log('mapping',table)
+        //console.log('mapping',table)
         let nlist=[]
         for(let x=0;x<table.length;x++){
           let nobj = {};
@@ -129,28 +129,34 @@ module.exports=class JMart extends VHPjapi{
      * @param {Number} pagecount 
      * @returns 
      */
-    RequestTable=(params={},all=true,table=[],pagecount=0)=>{
+    RequestTable=(params={},all=true,table=[],pagecount=1)=>{
         return new Promise((resolve,reject)=>{
           //console.log('Params >',params);
           if(params.success){
-
-            params.PageNum=pagecount++; //request the next page
+            console.log(pagecount);
+            params.ask.PageNum=pagecount; //request the next page
             this.SendRequest(params).then(response=>{
-              console.log('Response ',response)
                 let jpak={
                     success:params.success,
                     ...response
                 }
                 if(jpak.isValid){
-                    if(jpak.Template==='download'&&all&&jpak.PageMax>=pagecount){ //count iterates 1+ PageMax, JONAS has PageMax+1=last page
-                        try{table=table.concat(jpak.result);}catch{}//combine the tables to one list
-                        return resolve(this.RequestTable(params,all,table,pagecount))
+                    console.log('is ',jpak.PageNum,'max ',jpak.PageMax);
+                    if(jpak.Option==='download'&&all&&jpak.PageMax>pagecount && jpak.result.length !==undefined){ //count iterates 1+ PageMax, JONAS has PageMax+1=last page
+                      console.log('Start Table >',table.length);
+                      console.log('ADD Table >',jpak.result.length);
+                        try{table=[...table,...jpak.result];}catch{}//combine the tables to one list
+                        console.log('After Add >',table.length);
+                        return resolve(this.RequestTable(params,all,table,++pagecount))
                     }else{
-                      //try{
-                        jpak.result=this.MAPtable(table.concat(jpak.result),
+                      try{
+                      console.log('Start Table >',table.length);
+                      console.log('ADD Table >',jpak.result.length);
+                        jpak.result=this.MAPtable([...table,...jpak.result],
                           this.maps[jpak.Template]
                         )//;
-                      //}catch{}
+                          console.log('After Add >',jpak.result.length);
+                      }catch{}
                       return resolve(jpak);
                     }
                 }else{return resolve(jpak);}
@@ -162,7 +168,7 @@ module.exports=class JMart extends VHPjapi{
     }
 
     Request=(table,coid,pack)=>{
-        console.log(this.GETtablepack(table,coid,pack))
+        //console.log(this.GETtablepack(table,coid,pack))
         return this.RequestTable({
             success:true,
             msg:'Requesting',

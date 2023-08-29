@@ -18,7 +18,7 @@ module.exports={
 
     CallRoute:function(data){
         return new Promise((resolve,reject)=>{
-            console.log('DATA',data);
+            // /console.log('DATA',data);
             let {access,pack}=data;
             if(this.calls[pack.table]){
                 return resolve(this.calls[pack.table](pack,this.jmart));

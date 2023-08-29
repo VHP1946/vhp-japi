@@ -11,7 +11,7 @@
 */
     
 module.exports={
-    SCmaster:{
+    scmaster:{
         jpack:(data)=>{
             return{
                 Template:'WO_SC_ServiceContractMaster_tbl',
@@ -21,11 +21,29 @@ module.exports={
         },
         map:'WO_SC_ServiceContractMaster_tbl'
     },
-    SCbyCustomer:{
+    scbycustomer:{
         jpack:(data)=>{
             return{
                 Template:'WO_SC_ServiceContractMaster_tbl',
                 WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
+            }
+        },
+        map:'WO_SC_ServiceContractMaster_tbl'
+    },
+    scbystatus:{
+        jpack:(data)=>{
+            return{
+                Template:'WO_SC_ServiceContractMaster_tbl',
+                WHERE:[{OP:'=',ContractStatus:data.status||''}]
+            }
+        },
+        map:'WO_SC_ServiceContractMaster_tbl'
+    },
+    scbydept:{
+        jpack:(data)=>{
+            return{
+                Template:'WO_SC_ServiceContractMaster_tbl',
+                WHERE:[{OP:'=',SalesCategoryCode:data.cat||''}]
             }
         },
         map:'WO_SC_ServiceContractMaster_tbl'

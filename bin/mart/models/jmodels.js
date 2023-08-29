@@ -9,6 +9,8 @@ module.exports={
         ...require('./schemes/serviceModels.js'),
         ...require('./schemes/jobModels.js'),
         ...require('./schemes/customerModels.js'),
+        ...require('./schemes/contractModels'),
+        ...require('./schemes/serviceitemModels'),
         ...require('./schemes/reportingModels.js')
     }
 }

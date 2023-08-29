@@ -14,12 +14,15 @@ core.connected=true;
 let pack = {
     access:{
         coid:'01',
-        request:'JMART'
+        request:'JCALL'
     },
     pack:{
-        table:'wobynumber',
+        table:'scbydept',
         option:'download',
-        wonum:'0003665' //issue -> 36435
+        cat:'350'
+        //status:'A'
+        //custcode:'CUMM02' //issue -> 36435
+        //wonum:'00005642'
     }
 }
 
@@ -28,7 +31,7 @@ core.SENDrequest({
     pack:pack.pack,
     route:'JAPI',
     request:'JMART'
-}).then(answr=>{console.log(answr);})
+}).then(answr=>{console.log(answr.result.length);})
 
 
 /*

@@ -86,7 +86,7 @@ module.exports={
                     wonum:wonum,
                     option:'download'
                 }).then(woresp=>{//console.log('WO >',woresp);
-                    if(woresp.isValid&&woresp.result.length===1){
+                    if(woresp.isValid&&woresp.result && woresp.result.length===1){
                         wo = aticket(woresp.result[0]);//create wo
                         jmart.Request('custom','01',{
                             option:'download',

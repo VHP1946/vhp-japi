@@ -34,7 +34,7 @@ module.exports = class VHPjapi{
     SendRequest=(params={})=>{
       return new Promise((resolve,reject)=>{
         (async () => {
-          console.log(params.ask)
+          //console.log(params.ask)
           const { response } = await soapreq(
             { url: url,
               headers: sampleHeaders,
