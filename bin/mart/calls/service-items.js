@@ -56,24 +56,26 @@ module.exports={
                             ]
                         }).then(siinfo=>{
                             if(siinfo.isValid){
-                                for(let x=0,l=siinfo.result.length;x<l;x++){
-                                    for(let y=0,ll=sitems.length;y<ll;y++){
-                                        try{
-                                            if(sitems[y].custcode === siinfo.result[x].CustomerCode && sitems[y].id===siinfo.result[x].LineNumber){
-                                                switch(siinfo.result[x].FieldNumber){
-                                                    case "01":{sitems[y].filt1=siinfo.result[x].Information || '';}
-                                                    case "02":{sitems[y].filt1q=siinfo.result[x].Information || '';break;}
-                                                    case "03":{sitems[y].filt2=siinfo.result[x].Information || '';break;}
-                                                    case "04":{sitems[y].filt2q=siinfo.result[x].Information || '';break;}
-                                                    case "05":{sitems[y].beltsize=siinfo.result[x].Information || '';break;}
-                                                    case "06":{sitems[y].controls=siinfo.result[x].Information || '';break;}
-                                                    case "07":{sitems[y].refri=siinfo.result[x].Information || '';break;}
-                                                    case "08":{sitems[y].elec=siinfo.result[x].Information || '';break;}
+                                try{
+                                    for(let x=0,l=siinfo.result.length;x<l;x++){
+                                        for(let y=0,ll=sitems.length;y<ll;y++){
+                                            try{
+                                                if(sitems[y].custcode === siinfo.result[x].CustomerCode && sitems[y].id===siinfo.result[x].LineNumber){
+                                                    switch(siinfo.result[x].FieldNumber){
+                                                        case "01":{sitems[y].filt1=siinfo.result[x].Information || '';}
+                                                        case "02":{sitems[y].filt1q=siinfo.result[x].Information || '';break;}
+                                                        case "03":{sitems[y].filt2=siinfo.result[x].Information || '';break;}
+                                                        case "04":{sitems[y].filt2q=siinfo.result[x].Information || '';break;}
+                                                        case "05":{sitems[y].beltsize=siinfo.result[x].Information || '';break;}
+                                                        case "06":{sitems[y].controls=siinfo.result[x].Information || '';break;}
+                                                        case "07":{sitems[y].refri=siinfo.result[x].Information || '';break;}
+                                                        case "08":{sitems[y].elec=siinfo.result[x].Information || '';break;}
+                                                    }
                                                 }
-                                            }
-                                        }catch{console.log('bad linnumber',siinfo.result[x])}
-                                    }
-                                } 
+                                            }catch{console.log('bad linnumber',siinfo.result[x])}
+                                        }
+                                    } 
+                                }catch{}
                             }
                             return resolve({
                                 success:true,
