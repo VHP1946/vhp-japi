@@ -9,13 +9,33 @@
         map:'WO_SC_ServiceContractMaster_tbl'
     }
 */
-    
+let defsel = [
+    'CustomerCode',
+    'ServiceContractNumber',
+    "ContractNumberOriginal",
+    "ContractNumberRenewed",
+    "ContractDate",
+    "ContractDateFrom",
+    "ContractDateTo",
+    "SendRenewalDate",
+    "ContractType",
+    "ContractValue",
+    "NumberOfContractVisits",
+    "NumberOfBillings",
+    "ContractStatus",
+    "BillToCustomerCode",
+    "OriginalContractDate",
+    "UserID",
+    "CreatedDate",
+    "CreatedTime",
+    "SalesCategoryCode"
+]
 module.exports={
     scmaster:{
         jpack:(data)=>{
             return{
                 Template:'WO_SC_ServiceContractMaster_tbl',
-                SELECT:data.select||[],
+                SELECT:data.select||defsel,
                 WHERE:data.where||[]
             }
         },
@@ -25,6 +45,7 @@ module.exports={
         jpack:(data)=>{
             return{
                 Template:'WO_SC_ServiceContractMaster_tbl',
+                SELECT:defsel,
                 WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
             }
         },
@@ -34,6 +55,7 @@ module.exports={
         jpack:(data)=>{
             return{
                 Template:'WO_SC_ServiceContractMaster_tbl',
+                SELECT:defsel,
                 WHERE:[{OP:'=',ContractStatus:data.status||''}]
             }
         },
@@ -43,6 +65,7 @@ module.exports={
         jpack:(data)=>{
             return{
                 Template:'WO_SC_ServiceContractMaster_tbl',
+                SELECT:defsel,
                 WHERE:[{OP:'=',SalesCategoryCode:data.cat||''}]
             }
         },
