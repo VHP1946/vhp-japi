@@ -157,6 +157,7 @@ module.exports=class JMart extends VHPjapi{
                         )//;
                           console.log('After Add >',jpak.result.length);
                       }catch{}
+                      console.log('SENDING ',jpak.result)
                       return resolve(jpak);
                     }
                 }else{return resolve(jpak);}

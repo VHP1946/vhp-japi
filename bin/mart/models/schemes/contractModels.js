@@ -45,7 +45,6 @@ module.exports={
         jpack:(data)=>{
             return{
                 Template:'WO_SC_ServiceContractMaster_tbl',
-                SELECT:defsel,
                 WHERE:[{OP:'=',CustomerCode:data.custcode||''}]
             }
         },
