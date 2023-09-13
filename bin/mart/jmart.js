@@ -143,15 +143,14 @@ module.exports=class JMart extends VHPjapi{
                 if(jpak.isValid){
                     console.log('is ',jpak.PageNum,'max ',jpak.PageMax);
                     if(jpak.Option==='download'&&all&&jpak.PageMax>pagecount && jpak.result.length !==undefined){ //count iterates 1+ PageMax, JONAS has PageMax+1=last page
-                      console.log('Start Table >',table.length);
-                      console.log('ADD Table >',jpak.result.length);
+                      //console.log('Start Table >',table.length);
+                      //console.log('ADD Table >',jpak.result.length);
                         try{table=[...table,...jpak.result];}catch{}//combine the tables to one list
                         console.log('After Add >',table.length);
                         return resolve(this.RequestTable(params,all,table,++pagecount))
                     }else{
                       try{
-                      console.log('Start Table >',table.length);
-                      console.log('ADD Table >',jpak.result.length);
+                        console.log('SENDING ',jpak.result)
                         jpak.result=this.MAPtable([...table,...jpak.result],
                           this.maps[jpak.Template]
                         )//;
