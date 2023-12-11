@@ -4,22 +4,22 @@ const jmodels = require('./models/jmodels.js');
 
 
 /**Class to help request JONAS table
- * 
+ *
  * It can be used in 2 different ways:
- * 
- * 1) for one call - 
+ *
+ * 1) for one call -
  * 2) for more than one call - In this case you do not have to
- * send it a pack, and you 
- * 
+ * send it a pack, and you
+ *
  */
 module.exports=class JMart extends VHPjapi{
     /**
-     * 
+     *
      * @param {
      *   @param{Object} access
      *   @param{Object} pack
-     * } pack 
-     * @returns 
+     * } pack
+     * @returns
      */
     constructor({pack=null,keepalive=false}){
         super();
@@ -40,7 +40,7 @@ module.exports=class JMart extends VHPjapi{
 
     /**Takes in a table name and returns a request
      * pack.
-     * 
+     *
      * Below is the standard pack to send to JONAS.
      * Jonas pack:{
      *  WebMethod:'',
@@ -50,14 +50,14 @@ module.exports=class JMart extends VHPjapi{
      *  SELECT:[],
      *  WHERE:[]
      * }
-     * 
+     *
      * Data can hold any of the above, but can also
      * hold various other aruguments depending on the
      * table being used.
-     * 
+     *
      * @param {String} table
-     * @param {Object} data 
-     * @param {String} coid 
+     * @param {Object} data
+     * @param {String} coid
      */
     GETtablepack=(table=null,coid="",pack={})=>{
       if(table&&this.schemes[table]){
@@ -92,8 +92,8 @@ module.exports=class JMart extends VHPjapi{
 
     /**Takes in request pack and formats it correctly
      * for a Jonas Api Mart call.
-     * 
-     * @param {Object} pack 
+     *
+     * @param {Object} pack
      */
     PREPpack=(data)=>{
       const {access,pack} = data;
@@ -122,12 +122,12 @@ module.exports=class JMart extends VHPjapi{
 
     /**Organize the amount of requests to retrieve
      * the entire table (recursive)
-     * 
-     * @param {Object} params 
-     * @param {Boolean} all 
-     * @param {Array} table 
-     * @param {Number} pagecount 
-     * @returns 
+     *
+     * @param {Object} params
+     * @param {Boolean} all
+     * @param {Array} table
+     * @param {Number} pagecount
+     * @returns
      */
     RequestTable=(params={},all=true,table=[],pagecount=1)=>{
         return new Promise((resolve,reject)=>{
@@ -142,7 +142,7 @@ module.exports=class JMart extends VHPjapi{
                 }
                 if(jpak.isValid){
                     console.log('is ',jpak.PageNum,'max ',jpak.PageMax);
-                    if(jpak.Option==='download'&&all&&jpak.PageMax>pagecount && jpak.result.length !==undefined){ //count iterates 1+ PageMax, JONAS has PageMax+1=last page
+                    if(jpak.Option==='download'&&all&&jpak.PageMax&&jpak.PageMax>pagecount && jpak.result.length !==undefined){ //count iterates 1+ PageMax, JONAS has PageMax+1=last page
                       //console.log('Start Table >',table.length);
                       //console.log('ADD Table >',jpak.result.length);
                         try{table=[...table,...jpak.result];}catch{}//combine the tables to one list
