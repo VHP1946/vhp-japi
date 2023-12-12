@@ -93,17 +93,19 @@ module.exports=class JMart extends VHPjapi{
     /**Takes in request pack and formats it correctly
      * for a Jonas Api Mart call.
      *
+     * **THIS USES a defualt coid='01' only allowing access to the Vogel company
+     *
+     * @todo add pack option to pass coid (when we need to access other companies)
      * @param {Object} pack
      */
-    PREPpack=(data)=>{
-      const {access,pack} = data;
+    PREPpack=(pack)=>{
       let cpack = {
         success:false,
         msg:'Bad Company',
         ask:null
       }
-      if(access.coid!=''){
-          let jpack = this.GETtablepack(pack.table,access.coid,pack);
+      //if(pack.coid!=''){
+          let jpack = this.GETtablepack(pack.table,'01',pack);
           if(jpack){
             cpack={
               ...cpack,
@@ -116,8 +118,7 @@ module.exports=class JMart extends VHPjapi{
           }
           //console.log('PACK ',cpack)
           return cpack;
-      }
-      else{return cpack;}
+      //}else{return cpack;}
     }
 
     /**Organize the amount of requests to retrieve

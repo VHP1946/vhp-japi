@@ -4,7 +4,7 @@ var JCall = require('./mart/jcalls.js');
 /**
  * Function to handle and pass the incoming
  * request.
- * 
+ *
  * PASS:
  * - ask : {
  *   access:{},
@@ -13,7 +13,6 @@ var JCall = require('./mart/jcalls.js');
  */
 module.exports = ROUTEjapi=(ask={})=>{
     return new Promise((resolve,reject)=>{
-        let {access,pack}=ask;
         let waiter = null;
         switch(access.request.toUpperCase()){
             //case 'UPDATEFBOOK':{
